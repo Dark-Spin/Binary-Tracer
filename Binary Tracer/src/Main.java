@@ -1,152 +1,126 @@
-import java.util.ArrayList; 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
-public class Main { public static int name,left, right, middle, middleNum, target, middleGuess; public static String answer, going;
+public class Main {
+	static String name;
+	private static boolean complete = false;
+	private static int rightInput = 0;
+	private static int leftInput = 0;
+	private static int middleInput = 0;
+	private static int middleNumInput = 0;
+	private static int right = 0;
+	private static int left = 0;
+	private static int middle = 0;
+	private static int middleNum = 0;
+	private static int target = 0;
+	private static int nextInt = 0;
+	private static int correct = 0;
+	private static boolean again = true;
+	@SuppressWarnings("rawtypes")
+	private static ArrayList array = new ArrayList();
 
-@SuppressWarnings({ "resource", "unchecked", "rawtypes" })
-public static void main(String[] args) 
-{
-    ArrayList userInput = new ArrayList();
-    do
-    {
-        System.out.println("Would you like to enter a number?");
-        Scanner userinput = new Scanner(System.in);
-        answer = userinput.nextLine();
-        if (answer.equals("yes"))
-        {
-        System.out.println("Enter a number between 1 -20");
-        name = userinput.nextInt();
-        userInput.add(name);
-        
-        }
-    }
-    while(answer.equals("yes"));
-
-    System.out.println(userInput);
-
-    System.out.println("Enter Target Number");
-    Scanner userinput5 = new Scanner(System.in);
-    target = userinput5.nextInt();
-
-    System.out.println("Enter left spot?");
-    Scanner userinput0 = new Scanner(System.in);
-    left = userinput0.nextInt();
-    if(left == 0)
-    {
-        System.out.println("Correct");
-    }
-    else
-    {
-        System.out.println("Incorrect");
-    }
-    System.out.println("Enter right spot?");
-    right = userinput0.nextInt();
-    if(right == userInput.size()-1)
-    {
-        System.out.println("Correct");
-    }
-    else
-    {
-        System.out.println("Incorrect");
-    }
-    System.out.println("Enter middle spot?");
-    middleGuess = userinput0.nextInt();
-    if(middleGuess == (left + right)/2)
-    {
-        System.out.println("Correct");
-    }
-    else
-    {
-        System.out.println("Incorrect");
-    }
-    System.out.println("Enter middle number?");
-    middleNum = userinput0.nextInt();
-    middle = left + right / 2;
-    if(middleNum == (int) userInput.get(middle))
-    {
-        System.out.println("Correct");
-    }
-    else
-    {
-        System.out.println("Incorrect");
-    }
-
-
-
-    System.out.println("Keep Going?");
-    Scanner userinput3 = new Scanner(System.in);
-    going = userinput3.nextLine();
-
-    if(going.equals("yes"))
-    {
-        do
-        {
-
-        System.out.println(userInput);
-
-        System.out.println("Enter left spot?");
-        Scanner userinput4 = new Scanner(System.in);
-        left = userinput4.nextInt();
-        if(left < middle && target > middle)
-        {
-            if(left == middle)
-            System.out.println("Correct");
-
-            else 
-            {
-                System.out.println("Incorrect");
-            }
-        }
-        else if(left < middle && target < middle)
-        {
-            if(left == 0)
-                System.out.println("Correct");
-            else
-            System.out.println("Incorrect");
-        }
-        System.out.println("Enter right spot?");
-        right = userinput4.nextInt();
-        if(right > middle && middle < target)
-        {
-            if(right == userInput.size())
-            System.out.println("Correct");
-
-            else
-                System.out.println("Incorrect");
-        }
-        else if(right > middle && middle > target)
-        {
-            if(right == middle)
-                System.out.println("Correct");
-
-            else
-            System.out.println("Incorrect");
-        }
-        System.out.println("Enter middle spot?");
-        middleGuess = userinput4.nextInt();
-        if(middleGuess == (left + right)/2)
-        {
-            System.out.println("Correct");
-        }
-        else
-        {
-            System.out.println("Incorrect");
-        }
-        System.out.println("Enter number in the middle spot?");
-        middleNum = userinput4.nextInt();
-
-        middle = left + right / 2;
-        if(middleNum == (int) userInput.get(middle))
-        {
-            System.out.println("Correct");
-        }
-        else
-        {
-            System.out.println("Incorrect");
-        }
-
-        }
-        while(going.equals("yes"));
-    }   
-}
+	@SuppressWarnings({ "resource", "unchecked" })
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		System.out.println("Welcome Stranger, Please Enter Your Name");
+		name = input.nextLine();
+		System.out
+				.println("Welcome to the binary search test your knowledge game "
+						+ name + ".");
+		while (again == true) {
+			System.out
+					.println("Enter numbers 0 - 20, if you please could. Use the number -1 to end.");
+			while (nextInt != -1) {
+				Scanner arrayAdder = new Scanner(System.in);
+				if (arrayAdder.hasNextInt()) {
+					nextInt = arrayAdder.nextInt();
+					if (nextInt <= 20 && nextInt >= 0) {
+						array.add(nextInt);
+					} else if (nextInt != -1) {
+						System.out
+								.println("Input must be between 0 and 20 inclusive.");
+					}
+				} else {
+					System.out.println("Please enter a int.");
+				}
+			}
+			Collections.sort(array);
+			target = (int) (Math.random() * 20 + 1);
+			System.out.println("The target is " + target);
+			int counter = 0;
+			right = array.size() - 1;
+			while (complete == false) {
+				System.out.println(array.toString());
+				counter++;
+				System.out.print("Pass #" + counter + " Left: ");
+				leftInput = new Scanner(System.in).nextInt();
+				System.out.print("Right: ");
+				rightInput = new Scanner(System.in).nextInt();
+				System.out.print("Middle: ");
+				middleInput = new Scanner(System.in).nextInt();
+				System.out.print("Array[Middle]: ");
+				middleNumInput = new Scanner(System.in).nextInt();
+				// traceInput.close();
+				middle = (left + right) / 2;
+				middleNum = (int) array.get(middle);
+				if (rightInput == right && leftInput == left
+						&& middleInput == middle && middleNumInput == middleNum) {
+					System.out.println("Correct!");
+					correct++;
+				} else {
+					System.out.println("Incorrect. The correct answer is:");
+					System.out.println("Pass #" + counter + " Left: " + left
+							+ " Right: " + right + " Middle: " + middle
+							+ " Array[Middle]: " + middleNum);
+					System.out.println("Press enter to continue...");
+					Scanner pause = new Scanner(System.in);
+					pause.nextLine();
+				}
+				if (target < (int) array.get(middle)) {
+					right = middle - 1;
+				} else if (target < (int) array.get(middle)) {
+					left = middle + 1;
+				} else if (target == (int) array.get(middle)) {
+					complete = true;
+					System.out.println("The target was found at index "
+							+ middle);
+				} else {
+					complete = true;
+					System.out.println("The target was not in the array.");
+				}
+			}
+			System.out
+					.println("You got "
+							+ ((int) ((double) correct / counter * 100))
+							+ "% correct.");
+			if (((int) ((double) correct / counter * 100)) == 100) {
+				System.out.println("Perfect!");
+			} else if (((int) ((double) correct / counter * 100)) > 90) {
+				System.out.println("Well done!");
+			} else if (((int) ((double) correct / counter * 100)) > 80) {
+				System.out.println("Nice.");
+			} else if (((int) ((double) correct / counter * 100)) > 70) {
+				System.out.println("You could use some practice.");
+			} else if (((int) ((double) correct / counter * 100)) > 60) {
+				System.out.println("Keep practicing.");
+			} else {
+				System.out.println("You need to do some more problems");
+			}
+			Scanner check = new Scanner(System.in);
+			System.out
+					.println("Would you like to play again enter 1 for yes 2 for no.");
+			if (check.hasNextInt()) {
+				int repeat = check.nextInt();
+				if (repeat == 1) {
+					again = true;
+				} else {
+					again = false;
+				}
+			} else {
+				again = false;
+			}
+		}
+		System.out.println("Good practice, hope to see you again!");
+	}
 }

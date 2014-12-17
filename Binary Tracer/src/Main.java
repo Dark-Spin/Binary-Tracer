@@ -61,7 +61,6 @@ public class Main {
 				middleInput = new Scanner(System.in).nextInt();
 				System.out.print("Array[Middle]: ");
 				middleNumInput = new Scanner(System.in).nextInt();
-				// traceInput.close();
 				middle = (left + right) / 2;
 				middleNum = (int) array.get(middle);
 				if (rightInput == right && leftInput == left
